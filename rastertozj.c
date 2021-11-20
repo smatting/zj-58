@@ -501,14 +501,18 @@ int main(int argc, char *argv[]) {
         iBytesChunk = width_bytes * iBlockHeight;
       }
 
+      // TODO: remove this comment
       // lazy output of current raster. First check current line if it is zero.
       // if there were many zeroes and met non-zero - flush zeros by 'feed' cmd
       // if opposite - send non-zero chunk as raster.
+
       unsigned char *pBuf = pRasterBuf;
-      unsigned char *pChunk = pBuf;
+      /* unsigned char *pChunk = pBuf; */
       const unsigned char *pEnd = pBuf + iBytesChunk;
       int nonzerolines = 0;
       while ( pBuf<pEnd ) {
+        send_raster(pBuf, width_bytes, nonzerolines);
+        /*
         if (line_is_empty(pBuf, width_bytes)) {
           if (nonzerolines) { // met zero, need to flush collected raster
             send_raster(pChunk, width_bytes, nonzerolines);
@@ -524,9 +528,14 @@ int main(int argc, char *argv[]) {
             pChunk = pBuf;
           ++nonzerolines;
         }
+        */
+
         pBuf += width_bytes;
+        ++nonzerolines;
       }
-      send_raster(pChunk, width_bytes, nonzerolines);
+
+      /* send_raster(pChunk, width_bytes, nonzerolines); */
+      send_raster(pBuf, width_bytes, nonzerolines);
       //flushBuffer();
     } // loop over page
 
