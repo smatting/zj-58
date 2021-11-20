@@ -511,7 +511,7 @@ int main(int argc, char *argv[]) {
       const unsigned char *pEnd = pBuf + iBytesChunk;
       int nonzerolines = 0;
       while ( pBuf<pEnd ) {
-        send_raster(pBuf, width_bytes, nonzerolines);
+        send_raster(pBuf, width_bytes, 1);
         /*
         if (line_is_empty(pBuf, width_bytes)) {
           if (nonzerolines) { // met zero, need to flush collected raster
@@ -535,7 +535,7 @@ int main(int argc, char *argv[]) {
       }
 
       /* send_raster(pChunk, width_bytes, nonzerolines); */
-      send_raster(pBuf, width_bytes, nonzerolines);
+      send_raster(pBuf, width_bytes, 1);
       //flushBuffer();
     } // loop over page
 
