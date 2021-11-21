@@ -535,7 +535,7 @@ int main(int argc, char *argv[]) {
       }
 
       /* send_raster(pChunk, width_bytes, nonzerolines); */
-      send_raster(pBuf, width_bytes, 1);
+      /* send_raster(pBuf, width_bytes, 1); */
       //flushBuffer();
     } // loop over page
 
